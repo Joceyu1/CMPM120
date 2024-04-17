@@ -1,0 +1,148 @@
+{
+    "Title": "The Dream K*ller",
+    "Credits": "Created by Jocelyn Yu (joriyu@ucsc.edu).",
+    "InitialLocation": "Aeroplane",
+    "Locations": {
+        "Aeroplane": {
+            "Body": "You are in a 13-hour flight from Los Angeles to Japan. Now, it is after dinnertime, so you grow sleepy due to the delicious food the Airline served.",
+            "Choices": [
+                {
+                    "Text": "You instantly fall asleep.",
+                    "Target": "The Dream"
+                }
+            ]
+        },
+        "The Dream": {
+            "Body": "You get into a deep sleep, accidentally getting lured in an adventurous dream. In your dream, you hear someone with a squeaky voice say: Hey, hey, sir! Please follow me! This way! This way!",
+            "Choices": [
+                {
+                    "Text": "Turn your head to the voice source.",
+                    "Target": "Accept Quest"
+                },
+                {
+                    "Text": "Keep on walking forwards",
+                    "Target": "Reject Quest"
+                }
+            ]
+        },
+        "Accept Quest": {
+            "Body": "You see a cat motioning and wavign at you. You hastily run towards it, as if he has some kind of mission to quest for you.",
+            "Choices": [
+                {
+                    "Text": "Move forward.",
+                    "Target": "Gilbert"
+                }
+            ]
+        },
+        "Gilbert": {
+            "Body": "The cat introduced himself: Hello, my name is Gilbert, and I’m a secret detective for Wonderville! I’m desperate of finding a partner to complete this crime case. Oh Lord! Please help me on this mission!",
+            "Choices": [
+                {
+                    "Text": "Agree to work with Gilbert",
+                    "Target": "Street"
+                },
+                {
+                    "Text": "Reject his offer.",
+                    "Target": "The Reject Ending"
+                }
+            ]
+        },
+        "Street": {
+            "Body": "You agreed to go to the crime quest with Gilbert. The two of you take a fast-paced walk to the crime scene. You and Gilbert sees a man lying on the ground, both unconscious and cladded with blood.",
+            "Choices": [
+                {
+                    "Text": "You and Gilbert asks: Wait, what happened here?",
+                    "Target": "The Discovery"
+                }
+            ]
+        },
+        "Reject Quest": {
+            "Body": "You decide to ignore the annoying voice, and explore the mysterious location by yourself. Suddenly, you spot a man lying on the ground, unconscious, and cladded with blood.",
+            "Choices": [
+                {
+                    "Text": "Wait, what happened here?",
+                    "Target": "The Discovery"
+                }
+            ]
+        },
+        "The Discovery": {
+            "Body": "Walking towards the corpse, you find two sheets of  notes sticking out of its pocket. It reads: To whoever reads this, my life has been a hazard. I’m carrying this note everyday because there’s someone who’s for sure stalking me and plotting to kill me for IDK reason… Please help me, I’m scared… Would be a huge favour to help me catch my stalker….Thanks.",
+            "Choices": [
+                {
+                    "Text": "Proceed to read the other note, in curiosity.",
+                    "Target": "The Mission"
+                },
+                {
+                    "Text": "Walk away, feeling dangered as well ",
+                    "Target": "The Ending"
+                }
+            ]
+        },
+        "The Mission": {
+            "Body": "On the second sheet of paper, it reads: Please follow the blood footprints from mine and enter the building that the footprints lead to it. There are clues hidden there. Please help us innocent citizens by catching this vile murderer and stalker. Everyday, at least 5 people are killed, so very please help us….Oh and by the way, my birthday is on October 14, 1992.",
+            "Choices": [
+                {
+                    "Text": "Follow the footsteps",
+                    "Target": "The Clue Entrance"
+                }
+            ]
+        },
+        "The Clue Entrance": {
+            "Body": "As you reach to the building entrance, you see a 6-digit code lock. Recalling the corpse’s message and indication of its birthdate, you type in ‘101492.’ The door miraculously gets unlocked.",
+            "Choices": [
+                {
+                    "Text": "Enter the building cautiously",
+                    "Target": "Dimmed Building"
+                }
+            ]
+        },
+        "Dimmed Building": {
+            "Body": "You enter a mysterious, dimmed building. The lights are red coloured, which increases the adrenaline inside of your body.",
+            "Choices": [
+                {
+                    "Text": "No no, I should head out, 'tis not safe here.",
+                    "Target": "The Ending"
+                },
+                {
+                    "Text": "Grab the courage to keep on exploring the place.",
+                    "Target": "The Continuation"
+                }
+            ]
+        },
+        "The Continuation": {
+            "Body": "As you walk forwards, you spot a cam-recorder. Opening it, you go through the photos and videos it took, with the first photo saying: Swipe to the left on the switch thrice. Clues are hidden there.",
+            "Choices": [
+                {
+                    "Text": "Swipe the switch 3 times.",
+                    "Target": "The REAL Danger"
+                }
+            ]
+        },
+        "The REAL Danger": {
+            "Body": "You spot a video of a guy, who covered his nose and mouth using a black scarf with a piercing glaze, speaking in a monotonous voice. He says: Ahhh, I see you’ve fallen into my trap, you dummy. Beware, I’m currently standing right behind you with a knife. Muahahaha!",
+            "Choices": [
+                {
+                    "Text": "You get killed, which made you wake up from your terrifying dream.",
+                    "Target": "The Ending"
+                }
+            ]
+        },
+        "The Ending": {
+            "Body": "You wake up from your dream with the realisation that the person fsitting next to your seat constantly asking you if you're alright.",
+            "Choices": [
+                {
+                    "Text": "You say: Yes I am alright. Just got into a nerve-wrecking adventurous dream that is all. THE END!."
+                }
+            ]
+        },
+        "The Reject Ending": {
+            "Body": "You suddenly break off of your dream as you feel that you should watch the free movies provided by the Airline.",
+            
+            "Choices": [
+                {
+                    "Text": "THE END!."
+                }
+            ]
+        }
+    }
+}
