@@ -37,14 +37,13 @@ class Platformer extends Phaser.Scene {
         });
 
         // TODO: Add createFromObjects here
-        
         this.coins = this.map.createFromObjects("Objects", {
             name: "coin",
             key: "tilemap_sheet",
             frame: 151
         });
         
-        this.objectsLayer = this.map.createLayer("Objects", this.tileset, 0, 0);
+        this.objectsLayer = this.map.createLayer("Objects", this.tileset, 0, 0);        
 
         //this.animatedTiles.init(this.map);
         // TODO: Add turn into Arcade Physics here
@@ -106,8 +105,17 @@ class Platformer extends Phaser.Scene {
     }
 
     update() {
+        /*
+        let coinObjects = map.filterObjects("Objects", obj => obj.name === "coin");
+        this.coins = this.add.group();
+        for (let coin of coinObjects) {
+            let animCoinSprite = this.physics.add.sprite(coin);
+            this.coins.add(animCoinSprite);
+            animCoinSprite.anims.play('anim key'); // anim_key comes from prior this.anims.create call
+        }
+        */
         if(cursors.left.isDown) {
-            //console.log("jfdkjfksdfjskf"); //Testing to see if the console of the game even goes here (which it does).
+            console.log("jfdkjfksdfjskf"); //Testing to see if the console of the game even goes here (which it does).
             my.sprite.player.setAccelerationX(-this.ACCELERATION);
             my.sprite.player.resetFlip();
             my.sprite.player.anims.play('walk', true);
@@ -117,7 +125,7 @@ class Platformer extends Phaser.Scene {
             
             //Only play smoke effect if touching the ground: 
             if(my.sprite.player.body.blocked.down){
-                //console.log("214243215"); //Testing to see if the console of the game even goes here (which it does).
+                console.log("214243215"); //Testing to see if the console of the game even goes here (which it does).
                 my.vfx.walking.start();
             }
         } else if(cursors.right.isDown) {
