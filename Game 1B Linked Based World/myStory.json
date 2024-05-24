@@ -26,7 +26,7 @@
             ]
         },
         "Accept Quest": {
-            "Body": "You see a cat motioning and wavign at you. You hastily run towards it, as if he has some kind of mission to quest for you.",
+            "Body": "You see a cat motioning and waving at you. You hastily run towards it, as if he has some kind of mission to quest for you.",
             "Choices": [
                 {
                     "Text": "Move forward.",
@@ -66,7 +66,7 @@
             ]
         },
         "The Discovery": {
-            "Body": "Walking towards the corpse, you find two sheets of  notes sticking out of its pocket. It reads: To whoever reads this, my life has been a hazard. I’m carrying this note everyday because there’s someone who’s for sure stalking me and plotting to kill me for IDK reason… Please help me, I’m scared… Would be a huge favour to help me catch my stalker….Thanks.",
+            "Body": "Walking towards the corpse, you find two sheets of crumpled-up notes sticking out of its pocket. It reads: To whoever reads this, my life has been a hazard. I’m carrying this note everyday because there’s someone who’s for sure stalking me and plotting to kill me for IDK reason… Please help me, I’m scared… Would be a huge favour to help me catch my stalker….Thanks.",
             "Choices": [
                 {
                     "Text": "Proceed to read the other note, in curiosity.",
@@ -79,7 +79,7 @@
             ]
         },
         "The Mission": {
-            "Body": "On the second sheet of paper, it reads: Please follow the blood footprints from mine and enter the building that the footprints lead to it. There are clues hidden there. Please help us innocent citizens by catching this vile murderer and stalker. Everyday, at least 5 people are killed, so very please help us….Oh and by the way, my birthday is on October 14, 1992.",
+            "Body": "On the second sheet of paper, it reads: Please follow the blood footprints from mine and enter the building that the footprints lead to it. There are clues hidden there. Please help us innocent citizens by catching this vile murderer and stalker. Everyday, at least 5 people are killed, so very please help us….Oh and by the way, my birthday is on October 14, 1992. Please recall my birthdate and goodbye.",
             "Choices": [
                 {
                     "Text": "Follow the footsteps",
@@ -88,7 +88,7 @@
             ]
         },
         "The Clue Entrance": {
-            "Body": "As you reach to the building entrance, you see a 6-digit code lock. Recalling the corpse’s message and indication of its birthdate, you type in ‘101492.’ The door miraculously gets unlocked.",
+            "Body": "As you reach to the building entrance, you see a 6-digit code lock. Recalling the corpse’s message and indication of its birthdate obtained in the 2nd letter at the crime scene, you type in ‘101492.’",
             "Choices": [
                 {
                     "Text": "Enter the building cautiously",
@@ -97,20 +97,20 @@
             ]
         },
         "Dimmed Building": {
-            "Body": "You enter a mysterious, dimmed building. The lights are red coloured, which increases the adrenaline inside of your body.",
+            "Body": "The door miraculously gets unlocked. You enter a mysterious, dimmed building. The lights are red coloured, which increases the adrenaline inside of your body.",
             "Choices": [
                 {
-                    "Text": "No no, I should head out, 'tis not safe here.",
+                    "Text": "The door is unlocked, but you are a coward, hence you say: No no, I should head out, 'tis not safe here.",
                     "Target": "The Ending"
                 },
                 {
-                    "Text": "Grab the courage to keep on exploring the place.",
+                    "Text": "The door is unlocked, and as adventurous as you are, you grab the courage to keep on exploring the place.",
                     "Target": "The Continuation"
                 }
             ]
         },
         "The Continuation": {
-            "Body": "As you walk forwards, you spot a cam-recorder. Opening it, you go through the photos and videos it took, with the first photo saying: Swipe to the left on the switch thrice. Clues are hidden there.",
+            "Body": " You grab the flashlight dangling on the doornob of the entrance and pressed the 'on' button of the flashlight. You use the flashlight as a light source as the building is dimmed. As you walk forwards, you spot a cam-recorder. Opening it, you go through the photos and videos it took, with the first photo saying: Swipe to the left on the switch thrice. Clues are hidden there.",
             "Choices": [
                 {
                     "Text": "Swipe the switch 3 times.",

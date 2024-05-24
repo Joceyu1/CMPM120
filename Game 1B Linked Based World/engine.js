@@ -9,6 +9,9 @@ class Engine {
         this.firstSceneClass = firstSceneClass;
         this.storyDataUrl = storyDataUrl;
 
+        this.keyAcquired = false;
+        this.clueObtained = false;
+
         this.header = document.body.appendChild(document.createElement("h1"));
         this.output = document.body.appendChild(document.createElement("div"));
         this.actionsContainer = document.body.appendChild(document.createElement("div"));

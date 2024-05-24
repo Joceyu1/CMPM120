@@ -28,6 +28,23 @@ class Location extends Scene {
     handleChoice(choice) {
         if(choice) {
             this.engine.show("&gt; "+choice.Text);
+            if (choice == "The Mission") {
+                this.keyAcquired = true;
+            } else if (choice == "The Continuation") {
+                this.clueObtained = true;
+            } else if (choice == "Dimmed Building") {
+                if (this.keyAcquired) {
+                    this.engine.gotoScene(Location, choice.Target);
+                } else {
+                    this.engine.gotoScene(End);
+                }
+            } else if (choice == "The REAL Danger") {
+                if (this.clueObtained) {
+                    this.engine.gotoScene(Location, choice.Target);
+                } else {
+                    this.gotoScene(End);
+                }
+            }
             this.engine.gotoScene(Location, choice.Target);
         } else {
             this.engine.gotoScene(End);
