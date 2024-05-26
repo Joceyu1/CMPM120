@@ -11,6 +11,7 @@ class Engine {
 
         this.keyAcquired = false;
         this.clueObtained = false;
+        this.flashlightOn = false;
 
         this.header = document.body.appendChild(document.createElement("h1"));
         this.output = document.body.appendChild(document.createElement("div"));

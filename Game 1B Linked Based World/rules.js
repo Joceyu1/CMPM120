@@ -39,7 +39,13 @@ class Location extends Scene {
                     this.engine.gotoScene(End);
                 }
             } else if (choice == "The REAL Danger") {
-                if (this.clueObtained) {
+                if (this.clueObtained) { 
+                    this.engine.gotoScene(Location, choice.Target);
+                } else {
+                    this.gotoScene(End);
+                }
+            } else if (choice == "The Continuation") {
+                if (this.flashlightOn){
                     this.engine.gotoScene(Location, choice.Target);
                 } else {
                     this.gotoScene(End);
