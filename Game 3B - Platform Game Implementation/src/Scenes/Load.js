@@ -19,6 +19,13 @@ class Load extends Phaser.Scene {
             frameHeight: 18
         });
 
+        /*
+        // Loading the character tilemap::
+        this.load.spritesheet("charactermap_sheet", "tilemap-characters-packed.png", {
+            frameWidth: 18,
+            frameHeight: 18
+        });
+        */
         // Oooh, fancy. A multi atlas is a texture atlas which has the textures spread
         // across multiple png files, so as to keep their size small for use with
         // lower resource devices (like mobile phones).
@@ -26,6 +33,7 @@ class Load extends Phaser.Scene {
         // The multiatlas was created using TexturePacker and the Kenny
         // Particle Pack asset pack.
         this.load.multiatlas("kenny-particles", "kenny-particles.json");
+        this.load.audio("bongbong", "laserRetro_001.ogg");
     }
 
     create() {
@@ -58,6 +66,16 @@ class Load extends Phaser.Scene {
                 { frame: "tile_0001.png" }
             ],
         });
+
+        
+        this.anims.create({
+            key: 'spin',
+            defaultTextureKey: "tilemap_sheet",
+            frames: [
+                {frame: "coin"}
+            ],
+        });
+        
 
          // ...and pass to the next Scene
          this.scene.start("platformerScene");

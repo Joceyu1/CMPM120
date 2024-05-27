@@ -11,7 +11,6 @@ class Platformer extends Phaser.Scene {
         this.JUMP_VELOCITY = -600;
         this.PARTICLE_VELOCITY = 50;
         this.SCALE = 2.0;
-        //this.myScore = 0;
     }
 
      preload(){
@@ -19,10 +18,10 @@ class Platformer extends Phaser.Scene {
          this.load.tilemapTiledJSON("platformer-level-1", "platformer-level-1.tmj");
      }
 
-    create() {
+     create() {
         // Create a new tilemap game object which uses 18x18 pixel tiles, and is
         // 45 tiles wide and 25 tiles tall.
-        this.map = this.add.tilemap("platformer-level-1", 18, 18, 45, 25);
+        this.map = this.add.tilemap("platformer-level-1", 18, 18, 100, 30);
 
         // Add a tileset to the map
         // First parameter: name we gave the tileset in Tiled
@@ -31,6 +30,12 @@ class Platformer extends Phaser.Scene {
 
         // Create a layer
         this.groundLayer = this.map.createLayer("Ground-n-Platforms", this.tileset, 0, 0);
+
+        this.flag = this.map.createFromObjects("Objects", {
+            name: "flag",
+            key: "tilemap_sheet",
+            frame: 151
+        });
 
         // Make it collidable
         this.groundLayer.setCollisionByProperty({
@@ -44,17 +49,36 @@ class Platformer extends Phaser.Scene {
             frame: 151
         });
         
-        this.coins.scorePoints = 10;
+        this.enemies = this.map.createFromObjects("Objects", {
+            name: "enemy",
+            key: "platformer_characters",
+            frame: "tile_0015.png",
+        });
+
+        /*
+        this.spikes = this.map.createFromObjects("Objects", {
+            name: "spike",
+            key: "tilemap_sheet"
+        });
+        */
+        /*
+        this.anims.create({
+            key: 'spin',
+            defaultTextureKey: "tilemap_sheet",
+            frames: this.anims.generateFrameNumbers("coin", {start: 0, end: 5}),
+            frameRate: 10,
+            repeat: -1
+        });
         //this.objectsLayer = this.map.createLayer("Objects", this.tileset, 0, 0);     
         
-        let coinObjects = this.map.createFromObjects("Objects", obj => obj.name === "coin")
+        let coinObjects = this.map.filterObjects("Objects", obj => obj.name === "coin")
         this.coins = this.add.group();
         for (let coin of coinObjects) {
-            let animCoinSprite = this.physics.add.sprite(coin);
+            let animCoinSprite = this.physics.add.sprite(coin.x, coin.y, coin.key);
             this.coins.add(animCoinSprite);
-            animCoinSprite.anims.play('anim key'); // anim_key comes from prior this.anims.create call
-        }
-        
+            animCoinSprite.anims.play('spin'); // anim_key comes from prior this.anims.create call
+         }   
+        */
         //this.animatedTiles.init(this.map);
         // TODO: Add turn into Arcade Physics here
         // Since createFromObjects returns an array of regular Sprites, we need to convert
@@ -64,6 +88,9 @@ class Platformer extends Phaser.Scene {
         //Create a Phaser group out of the arry this.coins
         // This will be used for collision detection below.
         this.coinGroup = this.add.group(this.coins);
+        
+        //Create group for enemies::
+        this.enemyGroup = this.add.group(this.enemies);
 
         //this.animatedTiles.init(this.map);
 
@@ -73,10 +100,19 @@ class Platformer extends Phaser.Scene {
 
         // Enable collision handling
         this.physics.add.collider(my.sprite.player, this.groundLayer);
-
+        
+        this.myScore = 0;
+        my.text.score = this.add.text(32, 32, `Coins: ${this.myScore}`, {
+            fontFamily: "rocketSquare",
+            fontSize: '32px',
+            backgroundColor: '#000000'
+        }).setScrollFactor(0);
         // TODO: Add coin collision handler
         this.physics.add.overlap(my.sprite.player, this.coinGroup, (obj1, obj2) => {
             obj2.destroy(); //Removes the coin on overlap
+            this.myScore += 10;
+            my.text.score.text = `Coins: ${this.myScore}`;
+            console.log(this.myScore);
         });
 
         this.animatedTiles.init(this.map);
@@ -107,6 +143,21 @@ class Platformer extends Phaser.Scene {
        });
 
         my.vfx.walking.stop();
+
+        my.vfx.jumping = this.add.particles(0, 0, "kenny-particles", {
+            frame: ['star_02.png', 'star_09.png'],
+            // TODO: Try: add random: true
+            random: true,
+            scale: {start: 0.03, end: 0.1},
+            // TODO: Try: maxAliveParticles: 8,
+            maxAliveParticles: 18,
+            lifespan: 350,
+            // TODO: Try: gravityY: -400,
+            gravityY: -400,
+            alpha: {start: 1, end: 0.1}, 
+        });
+
+        my.vfx.jumping.stop();
         
         // TODO: add camera code here
         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
@@ -158,6 +209,7 @@ class Platformer extends Phaser.Scene {
             my.sprite.player.anims.play('idle');
             // TODO: have the vfx stop playing
             my.vfx.walking.stop();
+            my.vfx.jumping.stop();
         }
 
         // player jump
@@ -165,18 +217,42 @@ class Platformer extends Phaser.Scene {
         if(!my.sprite.player.body.blocked.down) {
             my.sprite.player.anims.play('jump');
         }
-        if(my.sprite.player.body.blocked.down && Phaser.Input.Keyboard.JustDown(cursors.up)) {
+        if(my.sprite.player.body.blocked.down && Phaser.Input.Keyboard.JustDown(cursors.up) && this.jumpCount === 0) {
+            this.sound.play("bongbong");
             my.sprite.player.body.setVelocityY(this.JUMP_VELOCITY);
+            this.jumpCount++;
+            my.vfx.jumping.startFollow(my.sprite.player, my.sprite.player.displayWidth/2-10, my.sprite.player.displayHeight/2-5, false);
+            my.vfx.jumping.setParticleSpeed(this.PARTICLE_VELOCITY, 0);
+            my.vfx.jumping.start();
+        } else if(!my.sprite.player.body.blocked.down && Phaser.Input.Keyboard.JustDown(cursors.up) && this.doubleJumpActive === true && this.jumpCount === 1){
+            //Double Jumping Here     
+            my.sprite.player.body.setVelocityY(-300);
+                this.jumpCount++;
+        } else if(my.sprite.player.body.blocked.down){
+            this.jumpCount = 0;
         }
-        /*
-        for(let coin of this.coins){
-            if(this.collides(my.sprite.player, coin)){
-                this.myScore += my.coins.scorePoints;
+
+        for(let enemy of this.enemies){
+            if(this.collides(my.sprite.player, enemy)){
+                this.myScore -= 10;
+                if(this.myScore == 0){
+                    this.add.text(315, 125, "GAME OVER! Press r to reset the game...", {
+                    fontFamily: 'Times, serif',
+                    fontSize: 35,
+                    wordWrap: {
+                        width: 100
+                    }
+                });
+                }
             }
         }
-        */
         if(Phaser.Input.Keyboard.JustDown(this.rKey)) {
             this.scene.restart();
         }
+    }
+    collides(a, b) {
+        if (Math.abs(a.x - b.x) > (a.displayWidth/2 + b.displayWidth/2)) return false;
+        if (Math.abs(a.y - b.y) > (a.displayHeight/2 + b.displayHeight/2)) return false;
+        return true;
     }
 }
